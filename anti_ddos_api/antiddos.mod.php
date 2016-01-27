@@ -4,7 +4,7 @@ require("$API_ROOT/db.php");
 function antiddos_insert() {
     $appname = @mysql_escape_string($_REQUEST['appname']);
     $accesskey = @mysql_escape_string($_REQUEST['accesskey']);
-    if (!isset($appname) || !isset($accesskey)) {
+    if (!$appname || !$accesskey) {
         die_(1, "'appname' and 'accesskey' is required");
     }
 
@@ -22,7 +22,7 @@ function antiddos_insert() {
 
 function antiddos_search() {
     $appname = @mysql_escape_string($_REQUEST['appname']);
-    if (!isset($appname)) {
+    if (!$appname) {
         die_(1, "'appname' is required");
     }
 
@@ -38,12 +38,8 @@ function antiddos_search() {
 function antiddos_updateServiceStatus() {
     $appname = @mysql_escape_string($_REQUEST['appname']);
     $service_status = @mysql_escape_string($_REQUEST['service_status']);
-    if (!isset($appname) || !isset($service_status)) {
-        die_(1, "'appname' and 'service_status' is required");
-    }
-
-    if ($service_status !== "0" && $service_status !== "1") {
-        die_(1, "'service_status' value must be 0 or 1'");
+    if (!$appname || $service_status !== "0" && $service_status !== "1") {
+        die_(1, "'appname' and 'service_status' is required, 'service_status' value must be 0 or 1");
     }
 
     $retval = db_run_sql("update anti_ddos set service_status=$service_status where appname='$appname'");
@@ -62,12 +58,8 @@ function antiddos_updateServiceStatus() {
 function antiddos_updateDomainStatus() {
     $appname = @mysql_escape_string($_REQUEST['appname']);
     $domain_status = @mysql_escape_string($_REQUEST['domain_status']);
-    if (!isset($appname) || !isset($domain_status)) {
-        die_(1, "'appname' and 'domain_status' is required");
-    }
-
-    if ($domain_status !== "0" && $domain_status !== "1") {
-        die_(1, "'domain_status' value must be 0 or 1'");
+    if (!$appname || $domain_status !== "0" && $domain_status !== "1") {
+        die_(1, "'appname' and 'domain_status' is required, 'domain_status' value must be 0 or 1");
     }
 
     $retval = db_run_sql("update anti_ddos set domain_status=$domain_status where appname='$appname'");
@@ -83,7 +75,7 @@ function antiddos_updateDomainStatus() {
 
 function antiddos_delete() {
     $appname = @mysql_escape_string($_REQUEST['appname']);
-    if (!isset($appname)) {
+    if (!$appname) {
         die_(1, "'appname' is reruired");
     }
 
