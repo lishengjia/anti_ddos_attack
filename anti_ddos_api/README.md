@@ -64,8 +64,9 @@
 
 备注:
 1,数据库字段相关信息
-appname:应用名
-accesskey：应用的ak
-service_status：标识ddos防火墙是否开启
-domain_status：表示此应用是否被解析到黑洞
-update_timestamp：此记录插入的当前时间
+
+    appname:应用名
+    accesskey：应用的ak
+    service_status：标识ddos防火墙是否开启
+    domain_status：表示此应用是否被解析到黑洞
+    update_timestamp：此记录插入的当前时间
